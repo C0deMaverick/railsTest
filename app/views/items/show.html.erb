@@ -12,9 +12,11 @@
 
 			<h1 class="item.title"><%= @item.title %></h1>
 			<h2 class="item.maker">Made by <%= @item.maker %></h2>
-			<h3>Average Rating</h3>
+			<h3 style="margin-bottom:0px;">Average Rating</h3>
+			<div class="review-summary-block">
 			<div class="average-review-rating" data-score=<%= @average_review %>></div>
-			<span class="number-of-reviews">Based on reviews from <%= @item.reviews.count %> users like you!</span>
+				<span class="number-of-reviews">Based on reviews from <%= @item.reviews.count %> users like you!</span>
+			</div>
 			<h4 class="item-description"><%= @item.description %></h4>
 			
 

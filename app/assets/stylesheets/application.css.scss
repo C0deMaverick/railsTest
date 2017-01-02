@@ -195,8 +195,11 @@ p.alert, p.notice {
 	.number-of-reviews {
 		font-size: 0.85em;
 		font-style: italic;
+		
 	}
-
+	.review-summary-block {
+		padding-bottom:30px;
+	}
 	.item-maker {
 		font-size: 1.5em;
 		margin-top: 10px;
@@ -389,7 +392,7 @@ p.alert, p.notice {
 
 
 .review-section {
-	margin-top:30px;
+	margin-top:15px;
 	padding-top:30px;
 	border-top:2px solid darkgray;
 }
@@ -399,5 +402,5 @@ p.alert, p.notice {
 
 .review-rating {
 	padding:15px;
-	padding-top: 5px;
+	padding-top: 0px;
 }
