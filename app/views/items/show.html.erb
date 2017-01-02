@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row" style="margin-bottom:30px;">
-		<div class="col-md-12">
-		<%= link_to "Back to Browse", root_path, class: "btn-custom" %>
+		<div class="col-md-12" style="margin-left:0px;">
+		<%= link_to "Back to Browse", root_path, class: "btn-custom", style:"margin-left:0px;" %>
 		</div>
 	</div>
 	<div class="row" >
@@ -9,9 +9,10 @@
 			<%= image_tag @item.item_img.url(:show_item), class: "show-item" %>
 		</div>
 		<div class="col-md-8 info-item">
-			<h2 class="item.title"><%= @item.title %></h2>
-			<h3 class="item.maker"><%= @item.maker %></h3>
-			<h2>Average Rating</h2>
+
+			<h1 class="item.title"><%= @item.title %></h1>
+			<h2 class="item.maker">Made by <%= @item.maker %></h2>
+			<h3>Average Rating</h3>
 			<div class="average-review-rating" data-score=<%= @average_review %>></div>
 			<span class="number-of-reviews">Based on reviews from <%= @item.reviews.count %> users like you!</span>
 			<h4 class="item-description"><%= @item.description %></h4>
@@ -28,19 +29,21 @@
 				<% end %>
 			<% end %>
 
-			<div class="col-md-12" style="margin-top:40px; border-top:2px solid darkgray">
-			<h1>Reviews</h1>
-		<!-- Where the reviews and ratings will go -->
-				<div class="col-md-9">
-					<%= render @item.reviews %>
+			<div class="col-md-12 review-section">
+				<div class="col-md-6">
+				<h1>Reviews</h1>
 				</div>
-				<div class="col-md-3">
-					<%= link_to "Add Review", new_item_review_path(@item), class: "btn-custom" %>
+				<div class="col-md-6">
+					<div class="col-md-12" style="padding-right:0px;">
+						<%= link_to "Add Review", new_item_review_path(@item), class: "btn-custom pull-right" %>
+					</div>
 				</div>
+				<div class="col-md-12 review-comment-section">
+					<div class="col-md-12">
+						<%= render @item.reviews %>
+					</div>
+				</div>	
 			</div>
-			
-
-
 		</div>
 	</div>	
 	<div class="row">

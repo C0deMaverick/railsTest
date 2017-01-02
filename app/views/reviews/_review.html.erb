@@ -1,13 +1,15 @@
-<div class="row" style="margin-top:20px; margin-bottom:20px;">
-
+<div class="row review-block">
+<h3 class="review-title"> <%= review.title %></h3>
 <div class="review-rating" data-score="<%= review.rating %>"></div>
-<p> <%= review.comment %></p>
+
+<p class="review-comment"> <%= review.comment %></p>
 
 
 <% if user_signed_in? %>
 	<% if review.user_id == current_user.id %>
-		<%= link_to "Edit", edit_item_review_path(review.item, review), class: "btn-custom2 " %>
-		<%= link_to "Delete", item_review_path(review.item, review), class: "btn-custom2 ", method: :delete, data: {confirm: "Are you sure?"} %>
+		
+		<%= link_to "Delete", item_review_path(review.item, review), class: "btn-custom2-small pull-right ", method: :delete, data: {confirm: "Are you sure?"} %>
+		<%= link_to "Edit", edit_item_review_path(review.item, review), class: "btn-custom-small pull-right" %>
 	<% end %>
 <% end %>
 </div>

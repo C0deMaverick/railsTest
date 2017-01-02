@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
 
 	private
 		def review_params
-			params.require(:review).permit(:rating, :comment)
+			params.require(:review).permit(:rating, :comment, :title)
 		end
 		def find_item
 			@item = Item.find(params[:item_id])
