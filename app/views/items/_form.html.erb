@@ -1,22 +1,12 @@
 <%= simple_form_for @item, :html => { :multipart => true } do |f|  %>
 
 <div class="row new-review-form-row">
-<div class="col-md-6">
-	<%= select_tag(:category_id, options_for_select(@categories), class: "form form-group form-control", :prompt => "Select a category") %>
-</div>
-<div class="col-md-6">
-	<%= f.file_field :item_img, class: "form form-group form-control" %>
-</div>
-
-
-
-
-
-
-
-
-
-
+	<div class="col-md-6">
+		<%= select_tag(:category_id, options_for_select(@categories), class: "form form-group form-control", :prompt => "Select a category") %>
+	</div>
+	<div class="col-md-6">
+		<%= f.file_field :item_img, class: "form form-group form-control" %>
+	</div>
 
 </div>
 <%= f.input :title, label: "Item Title" %>
