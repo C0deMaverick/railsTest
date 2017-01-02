@@ -1,7 +1,27 @@
-<h2><%= @item.title %></h2>
-<h3><%= @item.maker %></h3>
-<h4>Category: <%= @item.category.name %></h4>
-<h4><%= @item.description %></h4>
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-4">
+			<%= image_tag @item.item_img.url(:show_item) %>
+		</div>
+		<div class="col-md-8">
+			<h2><%= @item.title %></h2>
+			<h3><%= @item.maker %></h3>
+			<h4><%= @item.description %></h4>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-4">
+
+		<!-- Where the reviews and ratings will go -->
+		<%= render @item.reviews %>
+		<div>
+			<%= link_to "Add Review", new_item_review_path(@item) %>
+		</div>
+
+		</div>
+	</div>
+</div>	
 
 <%= link_to "Back", root_path %>
 <%= link_to "Edit", edit_item_path(@item) %>
@@ -10,4 +30,14 @@
 	<% if @item.user_id == current_user.id %>
 		<%= link_to "Delete", item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
 	<% end %>
+
+	<script>
+		$('.review-rating').raty({
+			readOnly: true,
+			score: function () {
+				return $(this).attr('data-score');
+			},
+			path: '/assets/'
+		});
+	</script>
 <% end %>

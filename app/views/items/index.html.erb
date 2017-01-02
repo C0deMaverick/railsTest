@@ -2,9 +2,15 @@
 <% if @items.count == 0 %>
 	<h3>There are currently no books in the category</h3>
 <% else %>
-	<% @items.each do |item| %>
-		<h2><%= link_to item.title, item_path(item) %></h2>
-	<% end %>
+	<div class="row">
+		<% @items.each do |item| %>
+			<div class="col-md-3">
+				<a href="/items/<%=item.id %>">
+					<%= image_tag item.item_img.url(:item_index), class: "index-item" %>
+				</a>
+			</div>
+		<% end %>
+	</div>	
 <% end %>
 
 
