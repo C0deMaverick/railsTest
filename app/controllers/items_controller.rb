@@ -2,34 +2,43 @@ class ItemsController < ApplicationController
 	before_action :find_item, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@items = Item.all.order("created_at DESC")
+		if params[:category].blank?
+			@items = Item.all.order("created_at DESC")
+		else
+			@category_id = Category.find_by(name: params[:category]).id
+			@items = Item.where(:category_id => @category_id).order("created_at DESC")
+		end
+	end
+
+	
+
+	def show
 	end
 
 	def new 
-		@item = Item.new
-	end
-
-	def show
-	
+		@item = current_user.items.build
+		@categories = Category.all.map{ |c| [c.name, c.id]}
 	end
 
 	def create
-		@item = Item.new(item_params)
+		@item = current_user.items.build(item_params)
+		@item.category_id = params[:category_id]
 
 		if @item.save 
 			redirect_to root_path
 		else
 			render 'new'
 		end
-
-
 	end
 
 	def edit
-
+		
+		@categories = Category.all.map{ |c| [c.name, c.id]}
 	end
 
 	def update
+
+		@item.category_id = params[:category_id]
 		if @item.update(item_params)
 			redirect_to item_path(@item)
 		else
@@ -47,12 +56,11 @@ class ItemsController < ApplicationController
 	private
 
 		def item_params
-			params.require(:item).permit(:title, :description, :maker)
+			params.require(:item).permit(:title, :description, :maker, :category_id)
 		end
 
 		def find_item
 			@item = Item.find(params[:id])
 		end
-
 
 end
