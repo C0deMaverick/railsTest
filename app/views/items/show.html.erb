@@ -1,41 +1,54 @@
 <div class="container">
-	<div class="row">
-
-		<div class="col-md-4">
-			<%= image_tag @item.item_img.url(:show_item) %>
+	<div class="row" style="margin-bottom:30px;">
+		<div class="col-md-12">
+		<%= link_to "Back to Browse", root_path, class: "btn-custom" %>
 		</div>
-		<div class="col-md-8">
-			<h2><%= @item.title %></h2>
-			<h3><%= @item.maker %></h3>
+	</div>
+	<div class="row" >
+		<div class="col-md-4">
+			<%= image_tag @item.item_img.url(:show_item), class: "show-item" %>
+		</div>
+		<div class="col-md-8 info-item">
+			<h2 class="item.title"><%= @item.title %></h2>
+			<h3 class="item.maker"><%= @item.maker %></h3>
 			<h2>Average Rating</h2>
 			<div class="average-review-rating" data-score=<%= @average_review %>></div>
-			<span>Based on reviews from <%= @item.reviews.count %> users like you!</span>
-			<h4><%= @item.description %></h4>
+			<span class="number-of-reviews">Based on reviews from <%= @item.reviews.count %> users like you!</span>
+			<h4 class="item-description"><%= @item.description %></h4>
+			
+
+
+
+
+			<%= link_to "Edit", edit_item_path(@item), class: "btn-custom2 pull-right" %>
+
+			<% if user_signed_in? %>
+				<% if @item.user_id == current_user.id %>
+					<%= link_to "Delete", item_path(@item), class: "btn-custom2 pull-right", method: :delete, data: {confirm: "Are you sure?"} %>
+				<% end %>
+			<% end %>
+
+			<div class="col-md-12" style="margin-top:40px; border-top:2px solid darkgray">
+			<h1>Reviews</h1>
+		<!-- Where the reviews and ratings will go -->
+				<div class="col-md-9">
+					<%= render @item.reviews %>
+				</div>
+				<div class="col-md-3">
+					<%= link_to "Add Review", new_item_review_path(@item), class: "btn-custom" %>
+				</div>
+			</div>
+			
+
+
 		</div>
 	</div>	
 	<div class="row">
-		<div class="col-md-4">
-
-		<!-- Where the reviews and ratings will go -->
-		<%= render @item.reviews %>
-		<div>
-			<%= link_to "Add Review", new_item_review_path(@item) %>
-		</div>
-
-		</div>
+		
 	</div>
 </div>	
 
-<%= link_to "Back", root_path %>
-<%= link_to "Edit", edit_item_path(@item) %>
 
-<% if user_signed_in? %>
-	<% if @item.user_id == current_user.id %>
-		<%= link_to "Delete", item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
-	<% end %>
-
-	
-<% end %>
 
 <script>
 		$('.review-rating').raty({
